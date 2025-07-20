@@ -15,6 +15,8 @@ services:
       context: ./airflow
       dockerfile: Dockerfile
     restart: always
+    env_file:
+      - .env    
     depends_on:
       - postgres
     environment:
@@ -22,12 +24,14 @@ services:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
       AIRFLOW_UID: ${AIRFLOW_UID}
+      STG_METEOMATICS_USERNAME: ${STG_METEOMATICS_USERNAME}
+      STG_METEOMATICS_PASSWORD: ${STG_METEOMATICS_PASSWORD}
     ports:
       - "8080:8080"
     volumes:
-      - ./airflow/dags:/opt/airflow/dags
-      - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/plugins:/opt/airflow/plugins
+      - ./keys:/keys:ro
+      - ../airflow/dags:/opt/airflow/dags
+      - ../airflow/logs:/opt/airflow/logs
     command: webserver
 
   airflow-scheduler:
@@ -35,6 +39,8 @@ services:
       context: ./airflow
       dockerfile: Dockerfile
     restart: always
+    env_file:
+      - .env
     depends_on:
       - postgres
     environment:
@@ -42,21 +48,27 @@ services:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
       AIRFLOW_UID: ${AIRFLOW_UID}
+      STG_METEOMATICS_USERNAME: ${STG_METEOMATICS_USERNAME}
+      STG_METEOMATICS_PASSWORD: ${STG_METEOMATICS_PASSWORD}      
     volumes:
-      - ./airflow/dags:/opt/airflow/dags
-      - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/plugins:/opt/airflow/plugins
+      - ./keys:/keys:ro
+      - ../airflow/dags:/opt/airflow/dags
+      - ../airflow/logs:/opt/airflow/logs
     command: scheduler
 
   airflow-init:
     image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.9.1}
     depends_on:
       - postgres
+    env_file:
+      - .env      
     environment:
       AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW__CORE__FERNET_KEY}
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
       AIRFLOW_UID: ${AIRFLOW_UID}
+      STG_METEOMATICS_USERNAME: ${STG_METEOMATICS_USERNAME}
+      STG_METEOMATICS_PASSWORD: ${STG_METEOMATICS_PASSWORD}      
     entrypoint: /bin/bash
     command:
       - -c

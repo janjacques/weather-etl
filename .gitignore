@@ -53,3 +53,6 @@ node_modules/
 
 # System files
 Thumbs.db
+
+# JSON key
+bq_service_account.json
