@@ -61,7 +61,8 @@ This project provides a reproducible ETL pipeline to extract weather data from a
 
     Run the dbt transformation DAG as needed.
 
-```Project Structure
+```
+Project Structure
 /
 ├── airflow/           # DAGs, plugins, Airflow config
 ├── dbt/               # dbt project (models, seeds, profiles)
