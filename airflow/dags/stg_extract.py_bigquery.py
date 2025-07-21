@@ -54,7 +54,6 @@ def load_to_bigquery(**context):
     dataset = os.environ.get("BQ_DATASET")
     table = os.environ.get("BQ_TABLE")
     table_id = f"{project}.{dataset}.{table}"
-    print(table_id)
     job = client.load_table_from_dataframe(df, table_id)  # Table and schema are inferred if not present
     job.result()  # Wait for the job to complete
     print(f"Loaded {job.output_rows} rows into {table_id}")

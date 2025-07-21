@@ -29,6 +29,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
+      - ../dbt:/opt/airflow/dbt
       - ./keys:/keys:ro
       - ../airflow/dags:/opt/airflow/dags
       - ../airflow/logs:/opt/airflow/logs
@@ -51,6 +52,7 @@ services:
       STG_METEOMATICS_USERNAME: ${STG_METEOMATICS_USERNAME}
       STG_METEOMATICS_PASSWORD: ${STG_METEOMATICS_PASSWORD}      
     volumes:
+      - ../dbt:/opt/airflow/dbt
       - ./keys:/keys:ro
       - ../airflow/dags:/opt/airflow/dags
       - ../airflow/logs:/opt/airflow/logs

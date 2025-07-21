@@ -1,0 +1,17 @@
+
+version: 2
+
+models:
+  - name: weather_fact_base
+    description: "Base weather model"
+    columns:
+      - name: validdate
+        tests:
+          - not_null
+      - name: lat
+        tests:
+          - not_null
+      - name: lon
+        tests:
+          - not_null
+

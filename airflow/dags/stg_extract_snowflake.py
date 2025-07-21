@@ -18,11 +18,10 @@ def load_to_snowflake(df):
     role = os.environ.get('SNOWFLAKE_ROLE')
     table_name = 'WEATHER_FACT'
 
-    # Reset index to columns so we can access lat, lon, validdate
+    # Reset Meteomatics DF index to columns for access to lat, lon, validdate 
     df_reset = df.reset_index()
-    print(f"df_out.columns: {df_reset.head()}\n")
 
-    # Select only the columns you need (as in your DataFrame)
+    # Select only the columns we need
     sf_columns = [
         'validdate',
         'lat',
@@ -37,6 +36,7 @@ def load_to_snowflake(df):
 
     df_out = df_reset[sf_columns]
 
+    # Make parameter columns compatible with Snowflake
     column_mapping = {
         't_2m:C': 'T_2M_C',
         'msl_pressure:hPa': 'MSL_PRESSURE_HPA',
@@ -47,9 +47,9 @@ def load_to_snowflake(df):
     }
 
     df_out.rename(columns=column_mapping, inplace=True)
-    # Convert all column names to uppercase to match Snowflake (crucial!)
+
+    # Convert all column names to uppercase to match Snowflake
     df_out.columns = [col.upper() for col in df_out.columns]
-    print(f"df_out.columns: {df_out.columns}\n")
 
     # Connect and upload
     conn = snowflake.connector.connect(
@@ -61,10 +61,6 @@ def load_to_snowflake(df):
         warehouse=warehouse,
         role=role,
     )
-
-    print(f"table_name: {table_name}\n")
-    print(f"table_name: {schema}\n")
-    print(f"table_name: {database}\n")
 
     try:
         success, nchunks, nrows, _ = write_pandas(

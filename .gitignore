@@ -36,6 +36,7 @@ dbt/target/
 dbt/dbt_modules/
 dbt/.dbt/
 
+
 # Secrets & environment
 .env
 .env.*

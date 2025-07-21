@@ -1,0 +1,25 @@
+weather_dbt:
+  target: staging
+  outputs:
+    staging:
+      type: snowflake
+      account: "{{ env_var('STAGING_SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('STAGING_SNOWFLAKE_USER') }}"
+      password: "{{ env_var('STAGING_SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('STAGING_SNOWFLAKE_ROLE') }}"
+      database: "{{ env_var('STAGING_SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('STAGING_SNOWFLAKE_WAREHOUSE') }}"
+      schema: "{{ env_var('STAGING_SNOWFLAKE_SCHEMA') }}"
+      threads: 1
+      client_session_keep_alive: False
+    # pro:
+    #   type: snowflake
+    #   account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+    #   user: "{{ env_var('PRO_SNOWFLAKE_USER') }}"
+    #   password: "{{ env_var('PRO_SNOWFLAKE_PASSWORD') }}"
+    #   role: airflow_pro_role
+    #   database: weather_etl
+    #   warehouse: airflow_wh
+    #   schema: pro
+    #   threads: 1
+    #   client_session_keep_alive: False
