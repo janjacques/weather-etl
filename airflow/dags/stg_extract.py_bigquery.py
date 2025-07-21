@@ -46,7 +46,7 @@ def extract_from_meteomatics(**context):
 
 def load_to_bigquery(**context):
     # Retrieve DataFrame dict from XCom
-    df_json = context['ti'].xcom_pull(task_ids='extract_weather_data')
+    df_json = context['ti'].xcom_pull(task_ids='extract_from_meteomatics')
     df = pd.read_json(df_json, orient="records")
     hook = BigQueryHook(gcp_conn_id='google_cloud_default')
     client = hook.get_client()
@@ -54,6 +54,7 @@ def load_to_bigquery(**context):
     dataset = os.environ.get("BQ_DATASET")
     table = os.environ.get("BQ_TABLE")
     table_id = f"{project}.{dataset}.{table}"
+    print(table_id)
     job = client.load_table_from_dataframe(df, table_id)  # Table and schema are inferred if not present
     job.result()  # Wait for the job to complete
     print(f"Loaded {job.output_rows} rows into {table_id}")
@@ -74,7 +75,7 @@ with DAG(
 ) as dag:
 
     extract = PythonOperator(
-        task_id='extract_weather_data',
+        task_id='extract_from_meteomatics',
         python_callable=extract_from_meteomatics,
     )
 
