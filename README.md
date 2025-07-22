@@ -72,6 +72,48 @@ Project Structure
 └── README.md
 ```
 
+## Local Testing with dbt
+
+You can test and develop dbt models locally without running the full Docker/Airflow stack. Below are steps to set up a local Python virtual environment and configure dbt for Snowflake:
+
+### 1. Create and Activate a Virtual Environment
+
+From the root of your project:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+
+### 2. Install dbt and Dependencies
+
+```bash
+pip install --upgrade pip
+pip install dbt-snowflake
+
+### 3. Configure dbt Profile for Snowflake
+
+   - dbt requires a profiles.yml file (by default located in ~/.dbt/).
+   - You can use the template provided in dbt/profiles.yml.example as a starting point.
+
+```bash
+mkdir -p ~/.dbt
+cp dbt/profiles.yml.example ~/.dbt/profiles.yml
+# Edit ~/.dbt/profiles.yml with your Snowflake credentials or use environment variables
+
+### 4. Test the Connection
+   - With your .venv activated and your profile configured, test the dbt connection:
+
+```bash
+dbt debug
+
+### 5. Run dbt Models Locally
+   - Still with your .venv activated, you can now build and test your models:
+
+```bash
+cd dbt
+dbt run
+dbt test
+
 ### Notes
    - Sensitive credentials should never be committed. Use .env only.
 

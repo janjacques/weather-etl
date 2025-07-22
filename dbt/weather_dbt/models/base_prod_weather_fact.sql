@@ -1,6 +1,7 @@
 {{ config(materialized='table') }}
 
 select
+    location_id,
     validdate,
     lat,
     lon,

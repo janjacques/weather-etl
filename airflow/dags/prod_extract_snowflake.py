@@ -10,13 +10,13 @@ import os
 # Snowflake connections details
 def get_snowflake_conn_params():
     return dict(
-        user=os.environ.get('STAGING_SNOWFLAKE_USER'),
-        password=os.environ.get('STAGING_SNOWFLAKE_PASSWORD'),
-        account=os.environ.get('STAGING_SNOWFLAKE_ACCOUNT'),
-        database=os.environ.get('STAGING_SNOWFLAKE_DATABASE'),
-        schema=os.environ.get('STAGING_SNOWFLAKE_SCHEMA'),
-        warehouse=os.environ.get('STAGING_SNOWFLAKE_WAREHOUSE'),
-        role=os.environ.get('STAGING_SNOWFLAKE_ROLE')
+        user=os.environ.get('PROD_SNOWFLAKE_USER'),
+        password=os.environ.get('PROD_SNOWFLAKE_PASSWORD'),
+        account=os.environ.get('PROD_SNOWFLAKE_ACCOUNT'),
+        database=os.environ.get('PROD_SNOWFLAKE_DATABASE'),
+        schema=os.environ.get('PROD_SNOWFLAKE_SCHEMA'),
+        warehouse=os.environ.get('PROD_SNOWFLAKE_WAREHOUSE'),
+        role=os.environ.get('PROD_SNOWFLAKE_ROLE')
     )
 
 def get_snowflake_connection():

@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    database: weather_etl
+    tables:
+      - name: weather_fact
+      - name: location_dim      
+  - name: prod
+    schema: prod
+    database: weather_etl
+    tables:
+      - name: weather_fact

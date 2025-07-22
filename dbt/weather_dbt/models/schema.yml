@@ -2,8 +2,8 @@
 version: 2
 
 models:
-  - name: weather_fact_base
-    description: "Base weather model"
+  - name: staging_weather_fact_base
+    description: "Base STAGING weather model"
     columns:
       - name: validdate
         tests:
@@ -14,4 +14,27 @@ models:
       - name: lon
         tests:
           - not_null
-
+  - name: base_prod_weather_fact
+    description: "Base PRO weather model"
+    columns:
+      - name: validdate
+        tests:
+          - not_null
+      - name: lat
+        tests:
+          - not_null
+      - name: lon
+        tests:
+          - not_null
+  - name: ops_staging_weather_daily
+    description: "Base PRO weather model"
+    columns:
+      - name: validdate
+        tests:
+          - not_null
+      - name: lat
+        tests:
+          - not_null
+      - name: lon
+        tests:
+          - not_null
