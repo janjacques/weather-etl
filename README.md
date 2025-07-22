@@ -96,8 +96,8 @@ From the root of your project:
 
 ### 3. Configure dbt Profile for Snowflake
 
-   - dbt requires a profiles.yml file (by default located in ~/.dbt/).
-   - You can use the template provided in dbt/profiles.yml.example as a starting point.
+   - dbt requires a profiles.yml file to be in the dbt project folder (weather_dbt).
+   - You can use the actual one provided in dbt/weather_dbt/profiles.yml as a starting point.
 
       ```bash
       mkdir -p ~/.dbt
