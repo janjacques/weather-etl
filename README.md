@@ -2,6 +2,8 @@
 
 This project provides a reproducible ETL pipeline to extract weather data from a public API, store it in Snowflake, and transform it with dbt. The solution is built on Airflow, Docker, and dbt, with all code and configuration managed in this repository.
 
+**Disclaimer: Production environments do NOT work (PRO DAGs and 'dbt --target production' do not work) and exist for demo purposes**
+
 ## Overview
 
 - **Extraction:** Airflow DAG fetches weather data from the Meteomatics API, processes it for compatibility, and loads it into a Snowflake source table.
@@ -114,9 +116,11 @@ From the root of your project:
    - Still with your .venv activated, you can now build and test your models:
 
       ```bash
-      cd dbt
-      dbt run
-      dbt test
+      cd dbt/weather_dbt
+      dbt debug --target staging
+      dbt source freshness --target staging
+      dbt run --target staging
+      # optional: dbt test --target staging
 
 ### Notes
    - Sensitive credentials should never be committed. Use .env only.
