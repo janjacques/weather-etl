@@ -42,13 +42,14 @@ This project provides a reproducible ETL pipeline to extract weather data from a
 
    - DDL scripts that must be executed are available in the `/sql` folder in the `create_infra.sql` file
    - Run the provided DDL queries in your Snowflake environment to set up the necessary database(s), schema(s), and tables for storing weather data.
-   - Example .
 
 ### Running the Pipeline
 
 1. **Build and Start Services**
 
-   terminal: docker compose up --build
+   - Navigate to /docker and run
+   ```
+   docker compose up --build
 
 2. **Access Airflow UI**
 
