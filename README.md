@@ -13,6 +13,7 @@ This project provides a reproducible ETL pipeline to extract weather data from a
 
 ### Prerequisites
 
+- Python
 - Meteomatics API access (either via paid or trial account)
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Docker Compose](https://docs.docker.com/compose/)
@@ -22,8 +23,10 @@ This project provides a reproducible ETL pipeline to extract weather data from a
 
 1. **Register with Meteomatics**
 
-   - Go to [Meteomatics](https://www.meteomatics.com/en/api/try-api/) and register for free trial API access.
+   - Go to [Meteomatics](https://www.meteomatics.com/en/sign-up-weather-api-test-account/) and register for free trial API access.
    - You will receive credentials to access their API.
+   - The trial API has limitations, viewable [here](https://www.meteomatics.com/en/api/available-parameters/)
+   - A meteomatics python module is available, you can find the docs [here](https://www.meteomatics.com/en/api/data-connectors/python/)
 
 2. **Fill Out the `.env` File**
 
